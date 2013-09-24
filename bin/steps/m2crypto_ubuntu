@@ -21,6 +21,7 @@ PATCH="
  %rename(sslv23_method) SSLv23_method;"
 
 WORKING_DIR=$(pwd)
+mkdir -p ./.heroku/src
 /app/.heroku/python/bin/pip install --download=./.heroku/src m2crypto --exists-action=w
 cd ./.heroku/src
 tar -xf M2Crypto-*.tar.gz
