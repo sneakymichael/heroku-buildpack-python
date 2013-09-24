@@ -20,9 +20,11 @@ PATCH="
  extern SSL_METHOD *SSLv3_method(void);
  %rename(sslv23_method) SSLv23_method;"
 
-pip install --download="." m2crypto
+/app/.heroku/python/bin/pip install --download="." m2crypto --exists-action=w --src=./.heroku/src
+cd ./.heroku/src
 tar -xf M2Crypto-*.tar.gz
 rm M2Crypto-*.tar.gz
 cd M2Crypto-*
 echo "$PATCH" | patch -p0
-python setup.py install
+python setup.py install &> /dev/null
+cd $WORKING_DIR

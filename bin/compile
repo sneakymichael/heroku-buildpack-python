@@ -227,6 +227,11 @@ if (grep -Fiq "hg+" requirements.txt) then
   bpwatch stop mercurial_install
 fi
 
+# Install m2crypto.
+bpwatch start m2crypto_ubuntu
+  source $BIN_DIR/steps/m2crypto_ubuntu
+bpwatch stop m2crypto_ubuntu
+
 # Install dependencies with Pip.
 puts-step "Installing dependencies using Pip ($PIP_VERSION)"
 
@@ -238,11 +243,6 @@ puts-step "Installing dependencies using Pip ($PIP_VERSION)"
 
 [ ! "$FRESH_PYTHON" ] && bpwatch stop pip_install
 [ "$FRESH_PYTHON" ] && bpwatch stop pip_install_first
-
-# Django collectstatic support.
-bpwatch start m2crypto_ubuntu
-  source $BIN_DIR/steps/m2crypto_ubuntu
-bpwatch stop m2crypto_ubuntu
 
 # Django collectstatic support.
 bpwatch start collectstatic
